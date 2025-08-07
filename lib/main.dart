@@ -32,15 +32,15 @@ void main() async {
     });
   }
 
-  // Inicializa os serviços de background e notificações
-  await NotificationService().initialize();
-  
   if (Platform.isAndroid) {
-    BackgroundService.initialize();
+    await BackgroundService.initialize();
     BackgroundService.startTaskChecker();
   } else if (Platform.isWindows) {
     WindowsBackgroundService.startTaskChecker();
   }
+  // Inicializa os serviços de background e notificações
+  await NotificationService().initialize();
+  
 
   runApp(const ProviderScope(child: MyApp()));
 }

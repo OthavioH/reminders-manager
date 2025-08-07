@@ -7,11 +7,10 @@ import 'package:reminder_manager/data/services/notification_service.dart';
 
 class BackgroundService {
   static const String _taskCheckerKey = 'taskChecker';
-  
-  static void initialize() {
-    Workmanager().initialize(
+
+  static Future<void> initialize() async {
+    await Workmanager().initialize(
       callbackDispatcher,
-      isInDebugMode: true,
     );
   }
 
@@ -21,7 +20,7 @@ class BackgroundService {
       _taskCheckerKey,
       frequency: const Duration(minutes: 1), // Verifica a cada 1 minuto
       constraints: Constraints(
-        networkType: NetworkType.not_required,
+        networkType: NetworkType.notRequired,
         requiresBatteryNotLow: false,
         requiresCharging: false,
         requiresDeviceIdle: false,
